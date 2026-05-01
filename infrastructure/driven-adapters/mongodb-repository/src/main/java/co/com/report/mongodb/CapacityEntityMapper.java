@@ -1,4 +1,4 @@
-package co.com.report.infrastructure.drivenadapters.mongodb.repository;
+package co.com.report.mongodb;
 
 import co.com.report.model.capacity.Capacity;
 import co.com.report.model.technology.Technology;

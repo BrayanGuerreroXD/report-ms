@@ -1,4 +1,4 @@
-package co.com.report.infrastructure.drivenadapters.mongodb.repository.auth;
+package co.com.report.mongodb.auth;
 
 import co.com.report.model.auth.Auth;
 import co.com.report.model.auth.gateways.AuthRepository;

@@ -1,4 +1,4 @@
-package co.com.report.infrastructure.drivenadapters.mongodb.repository;
+package co.com.report.mongodb;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;

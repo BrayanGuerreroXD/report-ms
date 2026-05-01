@@ -1,4 +1,4 @@
-package co.com.report.infrastructure.drivenadapters.mongodb.repository;
+package co.com.report.mongodb;
 
 import lombok.*;
 

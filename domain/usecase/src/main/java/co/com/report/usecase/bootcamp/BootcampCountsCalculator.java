@@ -6,6 +6,7 @@ import co.com.report.model.person.Person;
 import co.com.report.model.technology.Technology;
 import java.util.List;
 
+
 public class BootcampCountsCalculator {
 
     public Bootcamp calculate(Bootcamp bootcamp) {

@@ -6,10 +6,12 @@ import co.com.report.usecase.bootcamp.GetBootcampService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+@Component
 @RequiredArgsConstructor
 public class BootcampHandler {
 

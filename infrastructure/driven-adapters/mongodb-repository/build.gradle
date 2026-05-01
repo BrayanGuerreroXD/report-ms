@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':model')
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation 'org.mapstruct:mapstruct:' + rootProject.mapstructVersion
+    annotationProcessor 'org.mapstruct:mapstruct-processor:' + rootProject.mapstructVersion
+}
