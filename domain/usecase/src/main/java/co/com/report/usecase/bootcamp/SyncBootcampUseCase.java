@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 public class SyncBootcampUseCase implements SyncBootcampService {
 
     private final BootcampRepository bootcampRepository;
-    private final BootcampCountsCalculator countsCalculator;
+    private final BootcampCountsCalculator countsCalculator = new BootcampCountsCalculator();
 
     @Override
     public Mono<Bootcamp> sync(Bootcamp bootcamp) {
