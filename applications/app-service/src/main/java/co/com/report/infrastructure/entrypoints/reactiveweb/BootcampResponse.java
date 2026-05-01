@@ -21,33 +21,4 @@ public class BootcampResponse {
     private Integer technologyCount;
     private List<CapacityResponse> capacities;
     private List<PersonResponse> people;
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class CapacityResponse {
-        private String name;
-        private List<TechnologyResponse> technologies;
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class TechnologyResponse {
-        private String name;
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class PersonResponse {
-        private String name;
-        private String email;
-    }
 }
