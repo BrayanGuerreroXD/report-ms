@@ -1,6 +1,6 @@
 package co.com.report.infrastructure.entrypoints.reactiveweb;
 
-import co.com.report.domain.usecase.auth.GetAuthService;
+import co.com.report.usecase.auth.GetAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

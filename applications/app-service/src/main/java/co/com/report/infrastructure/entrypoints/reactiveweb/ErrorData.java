@@ -9,7 +9,7 @@ public class ErrorData {
     private final String message;
     private final String description;
 
-    public static ErrorData of(co.com.report.domain.exception.GlobalExceptionEnum error) {
+    public static ErrorData of(co.com.report.model.exception.GlobalExceptionEnum error) {
         return new ErrorData(error.name(), error.getMessage(), error.getDescription());
     }
 }

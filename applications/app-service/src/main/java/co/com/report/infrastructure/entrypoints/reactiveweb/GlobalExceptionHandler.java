@@ -1,6 +1,6 @@
 package co.com.report.infrastructure.entrypoints.reactiveweb;
 
-import co.com.report.domain.exception.*;
+import co.com.report.model.exception.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

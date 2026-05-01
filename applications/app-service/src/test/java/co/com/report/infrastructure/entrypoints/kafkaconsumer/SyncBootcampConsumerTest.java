@@ -1,7 +1,7 @@
 package co.com.report.infrastructure.entrypoints.kafkaconsumer;
 
-import co.com.report.domain.model.Bootcamp;
-import co.com.report.domain.usecase.bootcamp.SyncBootcampService;
+import co.com.report.model.bootcamp.Bootcamp;
+import co.com.report.usecase.bootcamp.SyncBootcampService;
 import co.com.report.infrastructure.entrypoints.reactiveweb.BootcampDTOMapper;
 import co.com.report.infrastructure.entrypoints.reactiveweb.BootcampEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;

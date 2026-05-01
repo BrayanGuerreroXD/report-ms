@@ -1,6 +1,9 @@
-package co.com.report.domain.usecase.bootcamp;
+package co.com.report.usecase.bootcamp;
 
-import co.com.report.domain.model.*;
+import co.com.report.model.bootcamp.Bootcamp;
+import co.com.report.model.capacity.Capacity;
+import co.com.report.model.person.Person;
+import co.com.report.model.technology.Technology;
 import java.util.List;
 
 public class BootcampCountsCalculator {

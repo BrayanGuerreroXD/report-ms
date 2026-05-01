@@ -1,8 +1,8 @@
 package co.com.report.infrastructure.entrypoints.reactiveweb;
 
-import co.com.report.domain.exception.NotFoundException;
-import co.com.report.domain.model.Bootcamp;
-import co.com.report.domain.usecase.bootcamp.GetBootcampService;
+import co.com.report.model.exception.NotFoundException;
+import co.com.report.model.bootcamp.Bootcamp;
+import co.com.report.usecase.bootcamp.GetBootcampService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

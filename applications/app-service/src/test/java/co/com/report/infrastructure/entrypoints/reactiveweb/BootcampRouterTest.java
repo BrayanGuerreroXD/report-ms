@@ -1,7 +1,7 @@
 package co.com.report.infrastructure.entrypoints.reactiveweb;
 
-import co.com.report.domain.model.*;
-import co.com.report.domain.usecase.bootcamp.GetBootcampService;
+import co.com.report.model.bootcamp.*;
+import co.com.report.usecase.bootcamp.GetBootcampService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

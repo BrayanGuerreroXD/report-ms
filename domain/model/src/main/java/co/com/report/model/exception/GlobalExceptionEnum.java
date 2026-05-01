@@ -1,4 +1,5 @@
-package co.com.report.domain.exception;
+package co.com.report.model.exception;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

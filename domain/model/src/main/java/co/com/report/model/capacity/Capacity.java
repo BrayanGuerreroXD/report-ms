@@ -1,14 +1,15 @@
 package co.com.report.model.capacity;
-import lombok.Builder;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-//import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import co.com.report.model.technology.Technology;
+import lombok.*;
+import java.util.List;
 
 @Getter
 @Setter
-//@NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@NoArgsConstructor
 public class Capacity {
+    private String name;
+    private List<Technology> technologies;
 }
