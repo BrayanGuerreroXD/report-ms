@@ -17,33 +17,4 @@ public class BootcampEvent {
     private Integer duration;
     private List<CapacityEvent> capacities;
     private List<PersonEvent> people;
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class CapacityEvent {
-        private String name;
-        private List<TechnologyEvent> technologies;
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class TechnologyEvent {
-        private String name;
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class PersonEvent {
-        private String name;
-        private String email;
-    }
 }
