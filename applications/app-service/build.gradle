@@ -5,8 +5,8 @@ dependencies {
     implementation project(':usecase')
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.kafka:spring-kafka'
-    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    implementation 'org.mapstruct:mapstruct:' + rootProject.mapstructVersion
+    annotationProcessor 'org.mapstruct:mapstruct-processor:' + rootProject.mapstructVersion
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
     testImplementation 'com.tngtech.archunit:archunit:1.4.1'
     testImplementation 'tools.jackson.core:jackson-databind'
