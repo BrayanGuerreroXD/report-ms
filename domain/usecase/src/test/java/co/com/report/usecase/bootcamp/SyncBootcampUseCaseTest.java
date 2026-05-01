@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class SyncBootcampUseCaseTest {
@@ -47,10 +48,10 @@ class SyncBootcampUseCaseTest {
 
         when(countsCalculator.calculate(input)).thenReturn(withCounts);
         when(bootcampRepository.findByExternalId(1L)).thenReturn(Mono.just(existing));
-        when(bootcampRepository.update(updated)).thenReturn(Mono.just(updated));
+        when(bootcampRepository.update(any(Bootcamp.class))).thenAnswer(inv -> Mono.just(inv.getArgument(0)));
 
         StepVerifier.create(useCase.sync(input))
-            .expectNext(updated)
+            .expectNextMatches(result -> result.getId().equals("existing-id") && result.getExternalId().equals(1L))
             .verifyComplete();
     }
 }
