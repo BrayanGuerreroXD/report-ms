@@ -6,9 +6,17 @@ spring:
     name: report-ms
   devtools:
     add-properties: false
-  h2:
-    console:
-      enabled: true
-      path: /h2
+  data:
+    mongodb:
+      uri: mongodb://admin:secret123@localhost:27017/webflux_db?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: report-ms-group
+      auto-offset-reset: earliest
   profiles:
     include:
+
+kafka:
+  topics:
+    bootcamp-report-sync: bootcamp.report.sync
