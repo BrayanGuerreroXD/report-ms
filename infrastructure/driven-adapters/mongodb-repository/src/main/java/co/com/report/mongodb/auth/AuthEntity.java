@@ -1,4 +1,4 @@
-package co.com.report.infrastructure.drivenadapters.mongodb.repository.auth;
+package co.com.report.mongodb.auth;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
