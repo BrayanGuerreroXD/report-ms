@@ -16,6 +16,8 @@ rootProject.name = 'report-ms'
 include ':app-service'
 include ':model'
 include ':usecase'
+include ':exception'
 project(':app-service').projectDir = file('./applications/app-service')
 project(':model').projectDir = file('./domain/model')
 project(':usecase').projectDir = file('./domain/usecase')
+project(':exception').projectDir = file('./domain/exception')
