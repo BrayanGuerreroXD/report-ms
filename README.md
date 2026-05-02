@@ -64,7 +64,7 @@ Example configuration in `applications/app-service/src/main/resources/applicatio
 
 ```yaml
 server:
-  port: 8080
+  port: 7900
 spring:
   application:
     name: report-ms
@@ -110,7 +110,7 @@ kafka:
 ./gradlew applications:app-service:bootRun
 ```
 
-The API will be available at `http://localhost:8080`
+The API will be available at `http://localhost:7900`
 
 ### Run Tests
 
@@ -128,8 +128,8 @@ The API will be available at `http://localhost:8080`
 ### Generate OpenApi Documentation (Swagger)
 
 Once the application is running, access:
-- Swagger UI: `http://localhost:8080/swagger-ui.html`
-- OpenApi JSON: `http://localhost:8080/v3/api-docs`
+- Swagger UI: `http://localhost:7900/swagger-ui.html`
+- OpenApi JSON: `http://localhost:7900/v3/api-docs`
 
 ## Implemented Features
 

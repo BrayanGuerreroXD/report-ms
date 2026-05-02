@@ -1,6 +1,6 @@
 ##Spring Configuration
 server:
-  port: 7800
+  port: 7900
 spring:
   application:
     name: report-ms
