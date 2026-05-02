@@ -20,3 +20,4 @@ spring:
 kafka:
   topics:
     bootcamp-report-sync: bootcamp.report.sync
+    auth-login-admin: auth.login.admin
