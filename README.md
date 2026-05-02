@@ -1,47 +1,152 @@
-# Proyecto Base Implementando Clean Architecture
+# Report Microservice
 
-## Antes de Iniciar
+Spring WebFlux API for generating reports from bootcamp data, consuming events via Kafka and exposing reactive REST endpoints.
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
+## Technologies
+- Spring WebFlux
+- Spring Security
+- Spring Data MongoDB Reactive
+- Apache Kafka
+- Java 25
+- Gradle
+- MongoDB
+- MapStruct
+- OpenApi Swagger
 
-Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+## Architecture
 
-# Arquitectura
+This project follows **Clean Architecture** principles as implemented in the Bancolombia scaffold. The architecture is organized into independent layers that facilitate maintenance and scalability.
 
-![Clean Architecture](https://miro.medium.com/max/1400/1*ZdlHz8B0-qu9Y-QO3AXR_w.png)
+### Project Structure (Based on Bancolombia Scaffold)
 
-## Domain
+```
+report-ms/
+├── applications/                 # Application layer (entry points)
+│   └── app-service/             # Main application service
+│       ├── src/
+│       │   ├── main/
+│       │   │   ├── java/        # Main source code
+│       │   │   └── resources/   # Configuration resources
+│       │   └── test/            # Tests
+│       └── build.gradle         # Gradle configuration for the service
+├── domain/                      # Domain layer (pure business)
+│   ├── model/                   # Entities and domain models
+│   └── usecase/                 # Application use cases
+├── infrastructure/              # Infrastructure layer (technical details)
+│   ├── driven-adapters/         # Adapters to external systems
+│   │   └── mongodb-repository/ # MongoDB repository adapter
+│   └── entry-points/            # Application entry points
+│       ├── reactive-web/        # Reactive web adapter (WebFlux)
+│       └── kafkaconsumer/      # Kafka consumer adapter
+├── deployment/                  # Deployment configurations
+├── build.gradle                 # Root Gradle configuration
+├── settings.gradle              # Multi-project configuration
+└── README.md                    # This file
+```
 
-Es el módulo más interno de la arquitectura, pertenece a la capa del dominio y encapsula la lógica y reglas del negocio mediante modelos y entidades del dominio.
+### Layer Details
 
-## Usecases
+1. **Domain**: Contains pure business logic, independent of frameworks and technologies.
+   - `model`: Entities representing business concepts (Bootcamp, Person, Capacity, Technology, Auth)
+   - `usecase`: Implementation of use cases that orchestrate application logic
 
-Este módulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lógica de aplicación y reacciona a las invocaciones desde el módulo de entry points, orquestando los flujos hacia el módulo de entities.
+2. **Infrastructure**: Technical implementation details.
+   - `driven-adapters`: Adapters that allow the domain to communicate with the outside world (MongoDB repositories)
+   - `entry-points`: System entry points (APIs, message queues, etc.)
 
-## Infrastructure
+3. **Applications**: Specific configuration for each service/application.
+   - Contains the main class with the `main` method
+   - Configures beans and dependencies specific to the service
 
-### Helpers
+## Configuration
 
-En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
+Example configuration in `applications/app-service/src/main/resources/application.yaml`:
 
-Estas utilidades no están arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
-genéricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
-basadas en el patrón de diseño [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
+```yaml
+server:
+  port: 8080
+spring:
+  application:
+    name: report-ms
+  data:
+    mongodb:
+      uri: mongodb://admin:secret123@localhost:27017/webflux_db?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: report-ms-group
+      auto-offset-reset: earliest
 
-Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
+kafka:
+  topics:
+    bootcamp-report-sync: bootcamp.report.sync
+```
 
-### Driven Adapters
+## Main Endpoints
 
-Los driven adapter representan implementaciones externas a nuestro sistema, como lo son conexiones a servicios rest,
-soap, bases de datos, lectura de archivos planos, y en concreto cualquier origen y fuente de datos con la que debamos
-interactuar.
+### Bootcamps
+- `GET /api/v1/bootcamps/max-technology-count` - Get the bootcamp with the maximum number of technologies
 
-### Entry Points
+### Security
+- All endpoints except `/actuator/**` and Swagger documentation require authentication
+- Unauthorized requests return HTTP 401
+- Access denied returns HTTP 403
 
-Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
+## Kafka Events
 
-## Application
+### Consumed Events
 
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
+**Bootcamp Sync Event** (`bootcamp.report.sync` topic):
+- Receives bootcamp data including name, description, duration, capacities, and people
+- Triggers synchronization of bootcamp information into the local MongoDB database
+- Automatically calculates and stores counts for persons, capacities, and technologies
 
-**Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
+## Development Commands
+
+### Start the API
+
+```bash
+# From the project root
+./gradlew applications:app-service:bootRun
+```
+
+The API will be available at `http://localhost:8080`
+
+### Run Tests
+
+```bash
+# Run all tests
+./gradlew test
+
+# Run tests for a specific module
+./gradlew applications:app-service:test
+./gradlew domain:model:test
+./gradlew domain:usecase:test
+./gradlew infrastructure:driven-adapters:mongodb-repository:test
+```
+
+### Generate OpenApi Documentation (Swagger)
+
+Once the application is running, access:
+- Swagger UI: `http://localhost:8080/swagger-ui.html`
+- OpenApi JSON: `http://localhost:8080/v3/api-docs`
+
+## Implemented Features
+
+- Clean Architecture following Bancolombia principles
+- Reactive programming with Spring WebFlux and Spring Data MongoDB Reactive
+- Authentication and authorization with Spring Security
+- Kafka consumer for event-driven bootcamp synchronization
+- MapStruct for entity/DTO mapping
+- Global exception handling
+- CORS configuration
+- Health checks and metrics with Actuator
+- Database migrations with Flyway (if applicable)
+
+## Prerequisites
+
+- Java 25
+- Gradle 8.x
+- MongoDB 6.x
+- Apache Kafka
+- Docker (optional, for development with containers)
